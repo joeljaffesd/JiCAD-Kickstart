@@ -1,0 +1,12 @@
+# KiCad files are text with LF endings; keep them that way on every machine
+*.kicad_pro  text eol=lf
+*.kicad_sch  text eol=lf
+*.kicad_pcb  text eol=lf
+*.kicad_sym  text eol=lf
+*.kicad_mod  text eol=lf
+*.kicad_dru  text eol=lf
+*.kicad_jobset text eol=lf
+*-lib-table  text eol=lf
+
+# Vendor 3D models that can't be re-fetched by id: store with Git LFS (run `git lfs install` once)
+vendor-3d/** filter=lfs diff=lfs merge=lfs -text

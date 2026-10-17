@@ -1,0 +1,30 @@
+# ---- KiCad / JiCAD per-user and per-machine state
+.history/
+*.kicad_prl
+*.lck
+~*.lck
+fp-info-cache
+*-backups/
+_autosave-*
+\#auto_saved_files\#
+
+# ---- JLC 3D models: footprints keep their JLC_3DModel ids; JiCAD restores missing models
+JLC-PARTS/JLC.3dshapes/
+
+# ---- generated outputs: rebuild (make order / make step) or attach to a release instead
+JLC_Order/
+*.step
+*.stp
+*.wrl
+renders/
+backups/
+
+# ---- vendor (non-JLC) 3D models are the exception: keep them, ideally via Git LFS (see .gitattributes)
+!vendor-3d/**
+
+# ---- OS / tooling
+.DS_Store
+__pycache__/
+*.pyc
+*-erc.rpt
+*-drc.rpt
