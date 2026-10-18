@@ -25,7 +25,7 @@ Fresh clone of a project that already has a board: open it in JiCAD, which resto
 | `*.kicad_pro`, `*.kicad_sch`, `*.kicad_pcb`, `*.kicad_dru`, `*.kicad_jobset` | `.history/` (JiCAD's local autosave repo) |
 | `sym-lib-table`, `fp-lib-table` | `*.kicad_prl`, `*.lck`, `fp-info-cache`, `*-backups/` |
 | `JLC-PARTS/JLC.kicad_sym`, `JLC-PARTS/JLC.pretty/` | `JLC-PARTS/JLC.3dshapes/`: restored by JiCAD |
-| project libraries (`*.pretty/`, `*.kicad_sym`) | `JLC_Order/`, `*.step`, renders, ERC/DRC reports |
+| project libraries (`*.pretty/`, `*.kicad_sym`) | `JLC_Order/`, `compat/`, `*.step`, renders, ERC/DRC reports |
 | `tools/`, `Makefile` | |
 | `vendor-3d/` (non-JLC models, via Git LFS) | |
 
@@ -46,6 +46,7 @@ tracked through Git LFS (`git lfs install` once), as set up in `.gitattributes`.
 | `make erc`, `make drc` | ERC / DRC (with schematic parity) |
 | `make order` | `JLC_Order/`: gerbers + drills (JLC's KiCad settings), zip, JLC BOM and CPL |
 | `make step` | 3D export with silkscreen |
+| `make compatible` | `compat/<Name>-kicad10/` + zip: a copy release KiCad 10.0 can open (needs only Python; refuses if the board uses JiCAD-only features) |
 
 `KICAD_CLI` and `BOARD` can be overridden, e.g. `make drc BOARD=Other KICAD_CLI=/path/to/kicad-cli`.
 

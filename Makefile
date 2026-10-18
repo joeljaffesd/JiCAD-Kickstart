@@ -4,13 +4,14 @@ BOARD ?= $(basename $(firstword $(wildcard *.kicad_pro)))
 NAME ?= $(notdir $(CURDIR))
 export KICAD_CLI
 
-.PHONY: help board order step drc erc
+.PHONY: help board order step drc erc compatible
 
 help:
 	@echo "make board         create NAME.kicad_pro/.kicad_sch/.kicad_pcb (NAME defaults to the folder: $(NAME)); fails if a board exists"
 	@echo "make erc / drc      run ERC / DRC ($(BOARD))"
 	@echo "make order          build JLC_Order/ (gerbers, zip, BOM, CPL)"
 	@echo "make step           export $(BOARD).step"
+	@echo "make compatible     KiCad 10.0 (release) copy in compat/ (+ zip); needs only Python"
 
 board:
 	@python3 tools/new_board.py $(NAME)
@@ -22,3 +23,5 @@ order:
 	@python3 tools/jlc_order.py .
 step:
 	@$(KICAD_CLI) pcb export step $(BOARD).kicad_pcb --grid-origin --subst-models --include-silkscreen -f -o $(BOARD).step
+compatible:
+	@python3 tools/kicad_compat.py $(BOARD)

@@ -17,6 +17,7 @@ JLC_Order/
 *.stp
 *.wrl
 renders/
+compat/
 backups/
 
 # ---- vendor (non-JLC) 3D models are the exception: keep them, ideally via Git LFS (see .gitattributes)
