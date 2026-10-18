@@ -1,6 +1,6 @@
 # JiCAD-Kickstart
 
-A starting point for a git-tracked JiCAD (KiCad) hardware project. 
+A starting point for a git-tracked JiCAD (KiCad fork) hardware project. 
 
 Create your repo from this template, then run
 `make board` to generate your board files.
@@ -29,13 +29,17 @@ Fresh clone of a project that already has a board: open it in JiCAD, which resto
 | `tools/`, `Makefile` | |
 | `vendor-3d/` (non-JLC models, via Git LFS) | |
 
-**Why the 3D models can be ignored.** Every footprint imported from JLC records its EasyEDA model id in a
+**Why the 3D models can be ignored:** 
+
+Every footprint imported from JLC records its EasyEDA model id in a
 `JLC_3DModel` property. JiCAD reads those ids and restores the exact same STEP, byte for byte, instead of
 re-importing by C-number (which could bring back a newer or different model). Footprints and symbols
 stay tracked: they hold your edits (variants, pad swaps, model offsets) and are tiny. Fab outputs (gerbers,
 drills, BOM, CPL) don't use 3D models at all, so a fresh clone can build a complete order before fetching any.
 
-**Models that can't be re-fetched:** put them in `vendor-3d/`. It's
+**Models that can't be re-fetched:** 
+
+Put them in `vendor-3d/`. It's
 tracked through Git LFS (`git lfs install` once), as set up in `.gitattributes`.
 
 ## Make targets
@@ -52,8 +56,7 @@ tracked through Git LFS (`git lfs install` once), as set up in `.gitattributes`.
 
 ## Working rules
 
-- **Releases:** tag the commit you order from, and attach `JLC_Order/*.zip`, the BOM and the CPL to the release
-  instead of committing them.
+- **Releases:** tag the commit you order from.
 - **Merges:** KiCad files are text but merge badly. One person per board file at a time.
 - **Unsaved state:** run `make order` from a saved board. JiCAD's local history (`.history/`) is your undo safety
   net, not git.
