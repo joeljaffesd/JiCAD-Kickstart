@@ -21,6 +21,13 @@ open(name + ".kicad_sch", "w").write(
 open(name + ".kicad_pcb", "w").write(
     '(kicad_pcb\n\t(version 20241229)\n\t(generator "pcbnew")\n\t(generator_version "9.0")\n'
     '\t(general\n\t\t(thickness 1.6)\n\t\t(legacy_teardrops no)\n\t)\n\t(paper "A4")\n\t(embedded_fonts no)\n)\n')
+# Stamp the files with the running JiCAD build's own format versions (no "created by an older version" warning).
+import subprocess
+cli = os.environ.get("KICAD_CLI", "/Users/joeljaffesd/Desktop/SKNKWRKS/JiCAD/build/install/KiCad.app/Contents/MacOS/kicad-cli")
+for kind, ext in (("sch", ".kicad_sch"), ("pcb", ".kicad_pcb")):
+    r = subprocess.run([cli, kind, "upgrade", "--force", name + ext], capture_output=True, text=True)
+    if r.returncode:
+        print(f"warning: kicad-cli {kind} upgrade failed ({r.stderr.strip() or r.stdout.strip()}); JiCAD will offer to convert on first save")
 print("created", name + ".kicad_pro/.kicad_sch/.kicad_pcb")
 
 # The template README's intro and quick start are for setting up the repo; once the board exists, replace
